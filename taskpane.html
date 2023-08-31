@@ -23,15 +23,19 @@
 
     async function sayHello() {
 
-        // Set coercion type to text since 
-        const options = { coercionType: Office.CoercionType.Text };
+        return PowerPoint.run(function(context) {
+    const shapes = context.presentation.slides.getItemAt(0).shapes;
+    const textbox = shapes.addTextBox("PowerPoint!", {
+      left: 100,
+      top: 300,
+      height: 300,
+      width: 450
+    });
+    textbox.name = "Textbox";
 
-        // clear current selection
-        await Office.context.document.setSelectedDataAsync(" ", options);
-
-        // Set text in selection to 'Hello world!'
-        await Office.context.document.setSelectedDataAsync("Hello world!", options);
-    }
+    return context.sync();
+        });
+    };
 
 </script>
 
