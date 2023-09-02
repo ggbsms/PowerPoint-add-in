@@ -30,7 +30,7 @@
     var linksArray = new Array();
     var maxLinks = 6;
     
-    const file = fetch("https://vergfravikis-my.sharepoint.com/:x:/g/personal/gunnar_vergfravik_is/ETw0smSGvsJCpyHyA7bGmjQBtCwsAjW0-0Al1iy8dBfTGQ?e=eFtsK0").then(res => {
+    fetch("https://vergfravikis-my.sharepoint.com/:x:/g/personal/gunnar_vergfravik_is/ETw0smSGvsJCpyHyA7bGmjQBtCwsAjW0-0Al1iy8dBfTGQ?e=eFtsK0").then(res => {
         return res.arrayBuffer();
     }).then(res => {
         console.log('file:', res);
