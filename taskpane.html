@@ -13,6 +13,9 @@
     <button onclick="refresh()">Refresh slides!</button>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js" > </script>
+
 <script>
     Office.onReady((info) => {
         // Check that we loaded into PowerPoint
@@ -23,9 +26,45 @@
 
     async function refresh() {
 
-        return PowerPoint.run(function(context) {
+    var links;
+    var linksArray = new Array();
+    var maxLinks = 6;
+    
+    const file = fetch("https://vergfravikis-my.sharepoint.com/:x:/g/personal/gunnar_vergfravik_is/ETw0smSGvsJCpyHyA7bGmjQBtCwsAjW0-0Al1iy8dBfTGQ?e=eFtsK0").then(res => {
+        return res.arrayBuffer();
+    }).then(res => {
+        console.log('file:', res);
+        var workbook = XLSX.read(new Uint8Array(res), {
+            type: 'array'
+        });
+    });
+
+    // var img;
+    // var imgArray = new Array();
+    // var maxImages = 6;
+
+    // for (let i = 1; i <= maxImages; i++) {
+    //     img = new Image();
+    //     img.onload = function() {imgArray.push(img)};
+    //     img.onerror = function() {i = maxImages} 
+    //     img.src = './JPGs/' + i + '.jpg';
+    // }
+
+
+    await PowerPoint.run(async(context) => {
+    
+    // const slide = context.presentation.slides.getItemAt(2);
+    // const images = slide.images;
+
+    // images.load("items/$none");
+    // await context.sync();
+
+    // images.items.forEach(function(image) {
+    //     image.delete();
+    // });
+    // await context.sync();
     const shapes = context.presentation.slides.getItemAt(0).shapes;
-    const textbox = shapes.addTextBox("Ástin mín!", {
+    const textbox = shapes.addTextBox(count, {
       left: 100,
       top: 300,
       height: 300,
