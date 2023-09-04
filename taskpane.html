@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#6!</button>
+    <button onclick="refresh()">Refresh#7!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -102,71 +102,73 @@
 
     console.log("D");
     const url = "https://vergfravikis-my.sharepoint.com/:w:/g/personal/gunnar_vergfravik_is/EftS3MFHwRZIs-FsImow1sEBQac4HCzcCRLH7gYkzG5jhw?e=hLiYI5";
+    const corsURL = "cors-anywhere.herokuapp.com/".concat(url);
 
-    const blob = await fetch(url, {mode: 'cors', headers: {'Authorization': 'Bearer access_token_value', 'Access-Control-Allow-Origin':'*'}})
-        .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
-        .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        // the filename you want
-        a.download = 'todo-1.json';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        // or you know, something with better UX...
-        alert('your file has downloaded!'); 
-    })
-    .catch(() => alert('oh no!'));;
-    // const getBlobFromUrl = (myImageUrl) => {
-    // return new Promise((resolve, reject) => {
-    //     let xhr = new XMLHttpRequest();
+    // const blob = await fetch(corsURL, {mode: 'cors', headers: {'Authorization': 'Bearer access_token_value', 'Access-Control-Allow-Origin':'*'}})
+    //     .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
+    //     .then(blob => {
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.style.display = 'none';
+    //     a.href = url;
+    //     // the filename you want
+    //     a.download = 'todo-1.json';
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     window.URL.revokeObjectURL(url);
+    //     // or you know, something with better UX...
+    //     alert('your file has downloaded!'); 
+    // })
+    // .catch(() => alert('oh no!'));;
+    const getBlobFromUrl = (myImageUrl) => {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
 
-    //     if("withCredentials" in xhr) {
-    //       xhr.open('GET', myImageUrl, true);
-    //     } else if (typeof XDomainRequest != "undefined") {
-    //       let xhr = new XDomainRequest(); 
-    //       xhr.open('GET', myImageUrl); 
-    //     } else {
-    //         xhr = null;
-    //     }
+        if("withCredentials" in xhr) {
+          xhr.open('GET', myImageUrl, true);
+        } else if (typeof XDomainRequest != "undefined") {
+          let xhr = new XDomainRequest(); 
+          xhr.open('GET', myImageUrl); 
+        } else {
+            xhr = null;
+        }
         
-    //     xhr.responseType = 'blob';
-    //     xhr.onload = () => {
-    //         resolve(request.response);
-    //     };
-    //     xhr.onerror = reject;
-    //     xhr.setRequestHeader('Authorization', 'Bearer access_token_value');
-    //     xhr.send();
-    //     })
-    // }
+        xhr.responseType = 'blob';
+        xhr.onload = () => {
+            resolve(request.response);
+        };
+        xhr.onerror = reject;
+        xhr.setRequestHeader('Authorization', 'Bearer access_token_value');
+        xhr.setRequestHeader('Access-Control-Allow-Origin','*');
+        xhr.send();
+        })
+    }
 
-    // const getDataFromBlob = (myBlob) => {
-    //     return new Promise((resolve, reject) => {
-    //         let reader = new FileReader();
-    //         reader.onload = () => {
-    //             resolve(reader.result);
-    //         };
-    //         reader.onerror = reject;
-    //         reader.readAsDataURL(myBlob);
-    //     })
-    // }
+    const getDataFromBlob = (myBlob) => {
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(myBlob);
+        })
+    }
 
-    // const convertUrlToImageData = async (myImageUrl) => {
-    //     try {
-    //         let myBlob = await getBlobFromUrl(myImageUrl);
-    //         console.log(myBlob)
-    //         let myImageData = await getDataFromBlob(myBlob);
-    //         console.log(myImageData)
-    //         return myImageData;
-    //     } catch (err) {
-    //         console.log(err);
-    //         return null;
-    //     }
-    // }
+    const convertUrlToImageData = async (myImageUrl) => {
+        try {
+            let myBlob = await getBlobFromUrl(myImageUrl);
+            console.log(myBlob)
+            let myImageData = await getDataFromBlob(myBlob);
+            console.log(myImageData)
+            return myImageData;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
 
-    // convertUrlToImageData(url);
+    convertUrlToImageData(corsURL);
 
     await PowerPoint.run(async(context) => {
     
