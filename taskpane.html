@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#4!</button>
+    <button onclick="refresh()">Refresh#5!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -103,7 +103,7 @@
     console.log("D");
     const url = "https://vergfravikis-my.sharepoint.com/:w:/g/personal/gunnar_vergfravik_is/EftS3MFHwRZIs-FsImow1sEBQac4HCzcCRLH7gYkzG5jhw?e=hLiYI5";
 
-    const blob = await fetch(url)
+    const blob = await fetch(url, {mode: 'cors'})
         .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
         .then(blob => {
         const url = window.URL.createObjectURL(blob);
