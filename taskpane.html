@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#8!</button>
+    <button onclick="refresh()">Refresh#9!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -20,31 +20,7 @@
 
 
 
-//     const getBase64(filteredRows,url) => {
-//         let filename = "Links.xlsx";
-//         let xmlHttpRequest = new XMLHttpRequest();
-//         xmlHttpRequest.onreadystatechange = function() {
-//         var a;
-//         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-//             a = document.createElement('a');
-//             a.href = window.URL.createObjectURL(xmlHttpRequest.response);
-//             a.download = filename;
-//             a.style.display = 'none';
-//             document.body.appendChild(a);
-//             a.click();
-//             }
-//         };
-//         xmlHttpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-//         xmlHttpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
-//         xmlHttpRequest.open("POST", '/abc/api/v1/export/'+ activity);
-//         xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
-//         xmlHttpRequest.responseType = 'blob';
-//         xmlHttpRequest.send(JSON.stringify({
-//             "key": "8575",
-//             "type":"userdetails",
-//             "data":filteredRows
-//     }));
-// }    
+   
 
 
    // getBase64(4,url);
@@ -101,8 +77,8 @@
     // }
 
     console.log("D");
-    const url = "https://vergfravikis-my.sharepoint.com/:w:/g/personal/gunnar_vergfravik_is/EftS3MFHwRZIs-FsImow1sEBQac4HCzcCRLH7gYkzG5jhw?e=hLiYI5";
-    const corsURL = "cors-anywhere.herokuapp.com/".concat(url);
+    const url = "https://vergfravikis-my.sharepoint.com/:x:/g/personal/gunnar_vergfravik_is/ETw0smSGvsJCpyHyA7bGmjQBtCwsAjW0-0Al1iy8dBfTGQ?e=ivWE9s";
+    const corsUrl = "cors-anywhere.herokuapp.com/".concat(url);
 
     // const blob = await fetch(corsURL, {mode: 'cors', headers: {'Authorization': 'Bearer access_token_value', 'Access-Control-Allow-Origin':'*'}})
     //     .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
@@ -120,55 +96,101 @@
     //     alert('your file has downloaded!'); 
     // })
     // .catch(() => alert('oh no!'));;
-    const getBlobFromUrl = (myImageUrl) => {
-    return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
+//     const getBlobFromUrl = (myImageUrl) => {
+//     return new Promise((resolve, reject) => {
+//         let xhr = new XMLHttpRequest();
 
-        if("withCredentials" in xhr) {
-          xhr.open('GET', myImageUrl, true);
-        } else if (typeof XDomainRequest != "undefined") {
-          let xhr = new XDomainRequest(); 
-          xhr.open('GET', myImageUrl); 
-        } else {
-            xhr = null;
-        }
+//         if("withCredentials" in xhr) {
+//           xhr.open('GET', myImageUrl, true);
+//         } else if (typeof XDomainRequest != "undefined") {
+//           let xhr = new XDomainRequest(); 
+//           xhr.open('GET', myImageUrl); 
+//         } else {
+//             xhr = null;
+//         }
         
-        xhr.responseType = 'blob';
-        xhr.onload = () => {
-            resolve(xhr.response);
-        };
-        xhr.onerror = reject;
-        xhr.setRequestHeader('Authorization', 'Bearer access_token_value');
-        xhr.setRequestHeader('Access-Control-Allow-Origin','*');
-        xhr.send();
-        })
-    }
+//         xhr.responseType = 'blob';
+//         xhr.onload = () => {
+//             resolve(xhr.response);
+//         };
+//         xhr.onerror = reject;
+//         xhr.setRequestHeader('Authorization', 'Bearer access_token_value');
+//         xhr.setRequestHeader('Access-Control-Allow-Origin','*');
+//         xhr.send();
+//         })
+//     }
 
-    const getDataFromBlob = (myBlob) => {
-        return new Promise((resolve, reject) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-                resolve(reader.result);
-            };
-            reader.onerror = reject;
-            reader.readAsDataURL(myBlob);
-        })
-    }
+//     const getDataFromBlob = (myBlob) => {
+//         return new Promise((resolve, reject) => {
+//             let reader = new FileReader();
+//             reader.onload = () => {
+//                 resolve(reader.result);
+//             };
+//             reader.onerror = reject;
+//             reader.readAsDataURL(myBlob);
+//         })
+//     }
 
-    const convertUrlToImageData = async (myImageUrl) => {
-        try {
-            let myBlob = await getBlobFromUrl(myImageUrl);
-            console.log(myBlob)
-            let myImageData = await getDataFromBlob(myBlob);
-            console.log(myImageData)
-            return myImageData;
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
-    }
+//     const convertUrlToImageData = async (myImageUrl) => {
+//         try {
+//             let myBlob = await getBlobFromUrl(myImageUrl);
+//             console.log(myBlob)
+//             let myImageData = await getDataFromBlob(myBlob);
+//             console.log(myImageData)
+//             return myImageData;
+//         } catch (err) {
+//             console.log(err);
+//             return null;
+//         }
+//     }
 
-    convertUrlToImageData(corsURL);
+//     convertUrlToImageData(corsURL);
+
+//         const getBase64(filteredRows,url) => {
+//         let filename = "Links.xlsx";
+//         let xmlHttpRequest = new XMLHttpRequest();
+//         xmlHttpRequest.onreadystatechange = function() {
+//         var a;
+//         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+//             a = document.createElement('a');
+//             a.href = window.URL.createObjectURL(xmlHttpRequest.response);
+//             a.download = filename;
+//             a.style.display = 'none';
+//             document.body.appendChild(a);
+//             a.click();
+//             }
+//         };
+//         xmlHttpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+//         xmlHttpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
+//         xmlHttpRequest.open("POST", '/abc/api/v1/export/'+ activity);
+//         xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+//         xmlHttpRequest.responseType = 'blob';
+//         xmlHttpRequest.send(JSON.stringify({
+//             "key": "8575",
+//             "type":"userdetails",
+//             "data":filteredRows
+//     }));
+// } 
+
+fetch(corsUrl)
+    .then(res => res.json())
+    .then(res => {
+      if (res.status !== `ok`) {
+        console.log("failed!")
+      } else {  
+        const target = res.target
+        const fileName = res.fileName
+        const data = res.data
+        const splitName = res.fileName.split('.')
+        const format = splitName[splitName.length-1]
+
+        // file saver blob solution
+        let json = JSON.stringify(data)
+        //let buffer = Buffer.from(JSON.parse(json).data)
+        //let readUTF8 = buffer.toString('utf8')
+        console.log(json, "JSON");
+      };
+
 
     await PowerPoint.run(async(context) => {
     
