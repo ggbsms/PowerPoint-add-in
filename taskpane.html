@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#14!</button>
+    <button onclick="refresh()">Refresh#15!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -114,7 +114,6 @@
             resolve(xhr.response);
         };
         xhr.onerror = reject;
-        xhr.setRequestHeader('Authorization', 'Bearer access_token_value');
         xhr.setRequestHeader('Access-Control-Allow-Origin','*');
         xhr.send();
         })
