@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#10!</button>
+    <button onclick="refresh()">Refresh#11!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -173,7 +173,7 @@
 // } 
 
 await fetch(corsUrl)
-    .then(res => res.json())
+    //.then(res => res.json())
     .then(res => {
       if (res.status !== `ok`) {
         console.log("failed!")
