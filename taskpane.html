@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#21!</button>
+    <button onclick="refresh()">Refresh#22!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -129,6 +129,7 @@
                             });
                             var row_object  = XLSX.utils.sheet_to_row_object_array(workbook.Sheets["Sheet1"]);
                             var json_object = JSON.stringify(XL_row_object);
+                            console.log(json_object);
                             };
             reader.onerror = reject;
     //         let metadata = {
@@ -143,7 +144,6 @@
     //        console.log("A");
     //        var row_object  = XLSX.utils.sheet_to_row_object_array(workbook.Sheets["Sheet1"]);
     //        var json_object = JSON.stringify(XL_row_object);
-            console.log(json_object);
          })
      }
 
