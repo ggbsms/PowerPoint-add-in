@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#16!</button>
+    <button onclick="refresh()">Refresh#17!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -121,12 +121,24 @@
 
     const getDataFromBlob = (myBlob) => {
         return new Promise((resolve, reject) => {
-            let reader = new FileReader();
-            reader.onload = () => {
-                resolve(reader.result);
+            //let reader = new FileReader();
+            //const data = reader.onload = () => {
+            //                resolve(reader.result);
+            //                };
+            //reader.onerror = reject;
+            let metadata = {
+                type: "application / vnd.ms - excel"
             };
-            reader.onerror = reject;
-            reader.createObjectURL(myBlob.slice(0, myBlob.size, "application/vdn.ms-excel"));
+            let file = new File([myBlob], "JPG_Links.xlsx", metadata);
+
+            //reader. createObjectURL(myBlob.slice(0, myBlob.size, "application/vdn.ms-excel"));
+             var workbook = XLSX.read(file, {
+                  type: 'binary'
+             });
+           console.log("A");
+           var row_object  = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[0]);
+           var json_object = JSON.stringify(XL_row_object);
+           console.log(json_object);
         })
     }
 
