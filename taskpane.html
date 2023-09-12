@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button id='RefreshButton'>Refresh#27!</button>
+    <button id='RefreshButton'>Refresh#28!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -28,7 +28,7 @@
 
     async function refresh() {  
         
-    await PowerPoint.run(async(context) => {
+    await Excel.run(async(context) => {
         var excelWorkbook = context.excelWorkbook.Open("C:\\PBIExport\\copiedPA.xlsx");
         var excelSheet = excelWorkbook.Worksheets("Sheet1");
     
