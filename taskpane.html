@@ -63,16 +63,15 @@
     //     image.delete();
     // });
     // await context.sync();
-    fetch('C://PBIExport//1.jpg')
-        .then(response => response.blob())
-        .then(blob => {
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = () => {
-            const base64data = reader.result;
-            console.log(base64data);
-            };
-    });
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        base64String = btoa(reader.result);
+        console.log(base64String);
+    };
+
+    reader.readAsBinaryString("C://PBIExport//1.jpg");
+
     const shapes = context.presentation.slides.getItemAt(0).shapes;
     const textbox = shapes.addTextBox("Tókst!", {
       left: 100,
