@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button id='RefreshButton'>Refresh#31!</button>
+    <button id='RefreshButton'>Refresh#32!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -73,8 +73,8 @@
         console.log('Error: ', error);
     };
 }
-
-    getBase64("C://PBIExport//1.jpg");
+    var file = "C://PBIExport//1.jpg"
+    getBase64(file.files[0]);
 
     const shapes = context.presentation.slides.getItemAt(0).shapes;
     const textbox = shapes.addTextBox("Tókst!", {
