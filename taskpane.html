@@ -10,44 +10,12 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button onclick="refresh()">Refresh#23!</button>
+    <button onclick="refresh()">Refresh#24!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js" > </script>
 
-<!-- <-- <script>
-
-
-
-   
-
-
-   // getBase64(4,url);
-    // as        function createFile() {
-    //     let response = await fetch(url);
-    //     response.headers('Access-Control-Allow-Origin', '*');
-    //     let data = await response.blob();
-    //     let metadata = {
-    //     type: 'application / vnd.ms - excel'
-    // };
-    //     let file = new File([data], "Links.xlsx", metadata);
-
-    //     return file;
-    // }
-
-    // const file = createFile();
-    // console.log("B");
-
-    // var workbook = XLSX.read(file, {
-    //     type: 'binary'
-    // });
-    //   console.log("A");
-    //   var row_object  = XLSX.utilssheet_to_row_object_array(workbook.Sheets[0]);
-    //   var json_object = JSON.stringify(XL_row_object);
-    //   console.log(json_object);
-
-</script> -->
 
 <script>
 
@@ -58,156 +26,28 @@
         }
     });
 
-    async function refresh() {
-
-    var links;
-    var linksArray = new Array();
-    var maxLinks = 6;
-    
-    
-    // var img;
-    // var imgArray = new Array();
-    // var maxImages = 6;
-
-    // for (let i = 1; i <= maxImages; i++) {
-    //     img = new Image();
-    //     img.onload = function() {imgArray.push(img)};
-    //     img.onerror = function() {i = maxImages} 
-    //     img.src = './JPGs/' + i + '.jpg';
-    // }
-
-    console.log("D");
-    const url = "https://vergfravikis-my.sharepoint.com/:x:/g/personal/gunnar_vergfravik_is/ETw0smSGvsJCpyHyA7bGmjQBtCwsAjW0-0Al1iy8dBfTGQ?e=9IqDcb";
-    const corsUrl = "https://mysterious-depths-70629-4b362ae3fcd0.herokuapp.com/".concat(url);
-
-    // const blob = await fetch(corsURL, {mode: 'cors', headers: {'Authorization': 'Bearer access_token_value', 'Access-Control-Allow-Origin':'*'}})
-    //     .then(resp => resp.status === 200 ? resp.blob() : Promise.reject('something went wrong'))
-    //     .then(blob => {
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.style.display = 'none';
-    //     a.href = url;
-    //     // the filename you want
-    //     a.download = 'todo-1.json';
-    //     document.body.appendChild(a);
-    //     a.click();
-    //     window.URL.revokeObjectURL(url);
-    //     // or you know, something with better UX...
-    //     alert('your file has downloaded!'); 
-    // })
-    // .catch(() => alert('oh no!'));;
-    const getBlobFromUrl = (myImageUrl) => {
-    return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
-
-        if("withCredentials" in xhr) {
-          xhr.open('GET', myImageUrl, true);
-        } else if (typeof XDomainRequest != "undefined") {
-          let xhr = new XDomainRequest(); 
-          xhr.open('GET', myImageUrl); 
-        } else {
-            xhr = null;
-        }
+    async function refresh() {  
         
-        xhr.responseType = 'blob';
-        xhr.onload = () => {
-            resolve(xhr.response);
-        };
-        xhr.onerror = reject;
-        xhr.setRequestHeader('Access-Control-Allow-Origin','*');
-        xhr.setRequestHeader('x-requested-with','XMLHttpRequest');
-        xhr.send();
-        })
+    var excel = new ActiveXObject("Excel.Application");
+    var excelFile = excel.Workbooks.Open("C://PBIExport//copiedPA.xlsx");
+    var excelSheet = excel.Worksheets("Sheet1");
+
+    
+    var base64;
+    var base64Array = new Array();
+    var maxBase64 = 6;
+
+    for (let i = 1; i <= maxBase64 + 2; i++) {
+        // img = new Image();
+        // img.onload = function() {imgArray.push(img)};
+        // img.onerror = function() {i = maxImages} 
+        // img.src = './JPGs/' + i + '.jpg';
+        excelSheet.Cells("B",i).Value ? base64Array.push(excelSheet.Cells("B",i)) : Break;
     }
 
-    const getDataFromBlob = (myBlob) => {
-        return new Promise((resolve, reject) => {
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                            var data = e.target.result;
-                            var workbook = XLSX.read(file, {
-                                 type: 'binary'
-                            });
-                            var row_object  = XLSX.utils.sheet_to_row_object_array(workbook.Sheets["Sheet1"]);
-                            var json_object = JSON.stringify(XL_row_object);
-                            console.log(json_object);
-                            };
-            reader.onerror = reject;
-    //         let metadata = {
-    //             type: 'application/vnd.ms-excel'
-    //         };
-    //         let file = new File([myBlob], "JPG_Links.xlsx", metadata);
+    console.log(base64Array);
 
-    //         //reader. createObjectURL(myBlob.slice(0, myBlob.size, "application/vdn.ms-excel"));
-    //          var workbook = XLSX.read(file, {
-    //               type: 'binary'
-    //          });
-    //        console.log("A");
-    //        var row_object  = XLSX.utils.sheet_to_row_object_array(workbook.Sheets["Sheet1"]);
-    //        var json_object = JSON.stringify(XL_row_object);
-         })
-     }
 
-    const convertUrlToImageData = async (myImageUrl) => {
-        try {
-            let myBlob = await getBlobFromUrl(myImageUrl);
-            console.log(myBlob)
-            let myImageData = await getDataFromBlob(myBlob);
-            console.log(myImageData)
-            return myImageData;
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
-    }
-
-    convertUrlToImageData(corsUrl);
-
-//         const getBase64(filteredRows,url) => {
-//         let filename = "Links.xlsx";
-//         let xmlHttpRequest = new XMLHttpRequest();
-//         xmlHttpRequest.onreadystatechange = function() {
-//         var a;
-//         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-//             a = document.createElement('a');
-//             a.href = window.URL.createObjectURL(xmlHttpRequest.response);
-//             a.download = filename;
-//             a.style.display = 'none';
-//             document.body.appendChild(a);
-//             a.click();
-//             }
-//         };
-//         xmlHttpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-//         xmlHttpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
-//         xmlHttpRequest.open("POST", '/abc/api/v1/export/'+ activity);
-//         xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
-//         xmlHttpRequest.responseType = 'blob';
-//         xmlHttpRequest.send(JSON.stringify({
-//             "key": "8575",
-//             "type":"userdetails",
-//             "data":filteredRows
-//     }));
-// } 
-
-// await fetch(corsUrl)
-//     //.then(res => res.json())
-//     .then(res => {
-//       if (res.status !== `ok`) {
-//         console.log("failed!")
-//       } else {  
-//         const target = res.target
-//         const fileName = res.fileName
-//         const data = res.data
-//         const splitName = res.fileName.split('.')
-//         const format = splitName[splitName.length-1]
-
-//         // file saver blob solution
-//         let json = JSON.stringify(data)
-//         //let buffer = Buffer.from(JSON.parse(json).data)
-//         //let readUTF8 = buffer.toString('utf8')
-//         console.log(json, "JSON");
-//       };
-//     });
 
     await PowerPoint.run(async(context) => {
     
