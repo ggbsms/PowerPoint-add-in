@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button id='RefreshButton'>Refresh#28!</button>
+    <button id='RefreshButton'>Refresh#29!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -28,26 +28,26 @@
 
     async function refresh() {  
         
-    await Excel.run(async(context) => {
-        var excelWorkbook = context.excelWorkbook.Open("C:\\PBIExport\\copiedPA.xlsx");
-        var excelSheet = excelWorkbook.Worksheets("Sheet1");
+    // await Excel.run(async(context) => {
+    //     var excelWorkbook = context.excelWorkbook.Open("C:\\PBIExport\\copiedPA.xlsx");
+    //     var excelSheet = excelWorkbook.Worksheets("Sheet1");
     
-        var base64;
-        var base64Array = new Array();
-        var maxBase64 = 6;
+    //     var base64;
+    //     var base64Array = new Array();
+    //     var maxBase64 = 6;
 
-        for (let i = 1; i <= maxBase64 + 2; i++) {
-            // img = new Image();
-            // img.onload = function() {imgArray.push(img)};
-            // img.onerror = function() {i = maxImages} 
-            // img.src = './JPGs/' + i + '.jpg';
-            excelSheet.Cells("B",i).Value ? base64Array.push(excelSheet.Cells("B",i)) : Break;
-        }
+    //     for (let i = 1; i <= maxBase64 + 2; i++) {
+    //         // img = new Image();
+    //         // img.onload = function() {imgArray.push(img)};
+    //         // img.onerror = function() {i = maxImages} 
+    //         // img.src = './JPGs/' + i + '.jpg';
+    //         excelSheet.Cells("B",i).Value ? base64Array.push(excelSheet.Cells("B",i)) : Break;
+    //     }
 
-        return context.sync();
-        });
+    //     return context.sync();
+    //     });
 
-    console.log(base64Array);
+    // console.log(base64Array);
 
 
 
@@ -63,6 +63,16 @@
     //     image.delete();
     // });
     // await context.sync();
+    fetch('C://PBIExport//1.jpg')
+        .then(response => response.blob())
+        .then(blob => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+            const base64data = reader.result;
+            console.log(base64data);
+            };
+    });
     const shapes = context.presentation.slides.getItemAt(0).shapes;
     const textbox = shapes.addTextBox("Tókst!", {
       left: 100,
