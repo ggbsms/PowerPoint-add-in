@@ -10,7 +10,7 @@
 
 <body>
     <p>This add-in will refresh the slides.</p>
-    <button id='RefreshButton'>Refresh#30!</button>
+    <button id='RefreshButton'>Refresh#31!</button>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js" > </script>
@@ -63,14 +63,18 @@
     //     image.delete();
     // });
     // await context.sync();
-    const reader = new FileReader();
-
-    reader.onload = () => {
-        base64String = btoa(reader.result);
-        console.log(base64String);
+    function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+        console.log(reader.result);
+        };
+        reader.onerror = function (error) {
+        console.log('Error: ', error);
     };
+}
 
-    reader.readAsBinaryString("C://PBIExport//1.jpg");
+    getBase64("C://PBIExport//1.jpg");
 
     const shapes = context.presentation.slides.getItemAt(0).shapes;
     const textbox = shapes.addTextBox("Tókst!", {
